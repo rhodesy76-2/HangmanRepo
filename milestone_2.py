@@ -49,5 +49,4 @@ while True:
         print("Oops! That is not a valid input.")
 # %%
 
-print("This print statement was created in Python")
 
