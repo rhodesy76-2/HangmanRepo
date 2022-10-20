@@ -58,7 +58,7 @@ def fib(n):
             a = b
             b = c
             print(c)
-fib(10)
+fib(20)
 
 
 
