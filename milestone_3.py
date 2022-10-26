@@ -45,7 +45,10 @@ else:
     print(f"Sorry, {guess} is not in the word. Try again.")
 
 # %%
+# Pulling the above into two functions, check_guess and ask_for_input, so it is easier to see what is what
+# guess and 
 
+# Import random module
 import random
 
 # Word List to play with
@@ -57,14 +60,15 @@ word = random.choice(word_list)
 print(word)
 
 
-# checks the letter is the random word
+# check_guess takes the guessed letter as an argument and check if the letter is in the word
 def check_guess(guess):
     guess = guess.lower()
     if guess in word:
         print(f"Good guess {guess} is in the word.")
     else:
         print(f"Sorry, {guess} is not in the word. Try again.")
-# Use as while true loop that takes the input and checks if the unput is a single letter and alphabetical
+
+# ask_for_input uses as while true loop that takes the input and checks if the input is a single letter and alphabetical, otherwise loops back until these conditions are met
 def ask_for_input():
     while True:
         guess = input("Please input a single letter")
