@@ -45,3 +45,16 @@ else:
     print(f"Sorry, {guess} is not in the word. Try again.")
 
 # %%
+
+
+def check_guess(guess):
+    guess = input("Please input a single letter")
+    guess = guess.lower()
+    while True:
+        if len(guess) == 1 and guess.isalpha():
+            print(f"You guesssed {guess}")
+            break
+        else :
+            print("Invalid letter. Please, enter a single alphabetical character.")
+check_guess(guess)
+# %%

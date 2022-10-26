@@ -412,38 +412,88 @@ else:
 # Create a function which returns True if the number is a multiple of 7 and False otherwise
 # Call this function on each number inside your loop
 # Add an elif condition to the loop to call another new function which checks if the number is greater than or equal to 100 OR is less than 50. In the case that it is True, format a string that prints the number and either "is larger than 100" or "is less than 50".
-# build on the bellow I used above?
+
 def fib(n):
     a = 0
     b = 1
     if n == 1:
         print(a)
         multiple_seven(a)
+        is_greater_than_100_or_less_than_50(a)
     else:
         print(a)
         multiple_seven(a)
+        is_greater_than_100_or_less_than_50(a)
         print(b)
         multiple_seven(b)
+        is_greater_than_100_or_less_than_50(b)
         for i in range(2,n):
             c = a + b
             a = b
             b = c
             print(c)
             multiple_seven(c)
+            is_greater_than_100_or_less_than_50(c)
             
             
-
-# fib(100)
 
 def multiple_seven(p):
     if p == 0:
-        print("False. This number is not a multiple of 7")
+        print("False. 0 is not a multiple of 7")
     elif p % 7 == 0:
-        print("True. This number is a multiple of 7")  
+        print(f"True. {p} is a multiple of 7")  
     else :
-        print("False. This number is not a multiple of 7")
-        
-        
+        print(f"False. {p} is not a multiple of 7")
+
+     
+def is_greater_than_100_or_less_than_50(q):
+    if q >= 100:
+        print(f"{q} is larger than 100")    
+    elif q <= 50:
+        print (f"{q} is smaller than 50")
+    else:
+        print(f"{q} is between 50 and 100")      
 # multiple_seven(5)      
 fib(100)
+# %%
+# Define a recursive function called inverse that returns the inverse of a string, where the start and end characters appear at the middle of the word
+
+def inverse(a_string):
+    first_half, second_half  = a_string[:len(a_string)//2], a_string[len(a_string)//2:]
+    print(first_half[::-1]+second_half[::-1])
+
+inverse("123456")
+
+# %%
+# Write a function that takes in a string and returns True if it is a palindrome and False otherwise
+def palindrome_test(b_string):
+    #b_string = b_string.lower()
+    if b_string == b_string[::-1]:
+        print(f"{b_string} is a palindrome")
+        return True
+    else:
+        print(f"{b_string} is not a palindrome")
+        return False
+
+palindrome_test("HannaH")
+palindrome_test("!HannaH!")
+
+
+
+# %%
+# Write a function that takes in a string and returns True if it is a palindrome and False otherwise. This time, ignore capitalisation and punctuation.
+import string
+
+def palindrome_test(b_string):
+    b_string = b_string.lower()
+    b_string = b_string.translate(str.maketrans('', '', string.punctuation))
+    if b_string == b_string[::-1]:
+        print(f"{b_string} is a palindrome")
+        return True
+    else:
+        print(f"{b_string} is not a palindrome")
+        return False
+
+palindrome_test("HannaH")
+palindrome_test("!HannaH!")
 # %%
