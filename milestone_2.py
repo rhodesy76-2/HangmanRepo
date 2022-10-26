@@ -3,7 +3,6 @@
 import random
 
 
-
 # Step 1. Create a list containing the names of your 5 favorite fruits.
 # Step 2. Assign this list to a variable called word_list
 # Step 3. Print out the newly created list to the standard output (screen).
@@ -38,7 +37,7 @@ else :
     print("Oops! That is not a valid input.")
 # %%
 
-# Combined above into a check letter while loop until only a single alphabetic letter is input
+# Combined above into a check letter while loop until only a single, alphabetic letter is input
 while True:
     guess = input("Please input a single letter")
     print(guess)
