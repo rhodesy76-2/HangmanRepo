@@ -46,15 +46,38 @@ else:
 
 # %%
 
+import random
 
+# Word List to play with
+word_list = ["banana", "apple", "kiwi", "orange", "pear"]
+print(word_list)
+
+# Takes word list and randomly chooses word
+word = random.choice(word_list)
+print(word)
+
+
+# checks the letter is the random word
 def check_guess(guess):
-    guess = input("Please input a single letter")
     guess = guess.lower()
+    if guess in word:
+        print(f"Good guess {guess} is in the word.")
+    else:
+        print(f"Sorry, {guess} is not in the word. Try again.")
+# Use as while true loop that takes the input and checks if the unput is a single letter and alphabetical
+def ask_for_input():
     while True:
+        guess = input("Please input a single letter")
         if len(guess) == 1 and guess.isalpha():
             print(f"You guesssed {guess}")
-            break
-        else :
-            print("Invalid letter. Please, enter a single alphabetical character.")
-check_guess(guess)
+            break 
+        else:
+            print(f"{guess} is an invalid letter. Please, enter a single alphabetical character.")
+    # Calls the check guess function with the single alphabetical guess
+    check_guess(guess)
+
+
+ask_for_input()
+
+    
 # %%
