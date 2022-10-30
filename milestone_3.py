@@ -32,9 +32,8 @@ while True:
 
 
 
-
-
 # %%
+
 # Step 6. Created an if statement that checks if the guess is in the word.
 if guess in word:
 # Step 7 Prints a message saying "Good guess! {guess} is in the word.". Obviously, format the string to show the actual guess instead of {guess}.

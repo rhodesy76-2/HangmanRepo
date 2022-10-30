@@ -35,9 +35,11 @@ volume_of_sphere(4)
 # import pi from math
 from cgitb import reset
 from math import factorial, pi
+import math
 from typing_extensions import Self
 from unicodedata import name
-from xml.dom import ValidationErr 
+from xml.dom import ValidationErr
+from xml.dom.expatbuilder import FragmentBuilderNS 
 # function to calculate volume
 def volume(r): 
     return (4 * pi * r ** 3) / 3 
@@ -496,4 +498,319 @@ def palindrome_test(b_string):
 
 palindrome_test("HannaH")
 palindrome_test("!HannaH!")
+# %%
+# create a cylinder class
+# Surafce area cylinder: A=2πrh+2πr2
+# Volume of a tube: V=πr2h
+
+import math
+
+class Cylinder:
+    def __init__(self, height, radius):
+        self.height = height
+        self.radius = radius
+        self.surface_area = round(((2 * math.pi * self.radius * self.height) + (2 * math.pi * self.radius**2)), 2)
+        self.volume = round((math.pi * self.radius**2 * self. height), 2)
+     
+    def get_surface_area(self):
+        return self.surface_area
+    
+    def get_volume(self):
+        return self.volume
+    
+
+cyl_1 = Cylinder(6,3)
+print(cyl_1.get_surface_area())
+print(cyl_1.get_volume())
+print(cyl_1.__dict__)
+
+# lols that height 6 and radius 3 volume = surface area
+
+# %%
+# Hangman program?
+
+# %%
+# Create a Class with model and year as arguements, with additiional attribute of miles driven set to 0 in the init function
+
+class Car:
+    def __init__(self, model, year):
+        self.model = model
+        self.year = year
+        self.miles_driven = 0
+        
+    def drive(self):
+        self.miles_driven += 1
+        return "vroom"
+        
+    def info(self):
+        #return (self.miles_driven, self.model, self.year)
+        return self.__dict__
+        
+        
+car_1 = Car("Ford", 1999)
+print(car_1.drive())
+print(car_1.info())
+
+    
+# %%
+# Magic method Vector class
+
+
+
+class Vector:
+
+    def __init__(self, *args):
+        self.args = args
+
+    # addition is normally a binary operation between self and other object
+    def __add__(self, other):
+    # other.args is the correct analog of self.args
+    # The zip() function takes iterables (can be zero or more), aggregates them in a tuple, and returns it.
+        a = [arg1 + arg2 for arg1, arg2 in zip(self.args, other.args)]
+        return self.__class__(*a)
+
+    # __repr__  must return string
+    def __repr__(self):
+        return self.__class__.__name__ + str(self.args)
+
+# Define how you index an item in a vector
+# Define how to compare whether it is greater than another vector using a greater than (>) sign (use Pythagoras theorem). Use the method you defined in the question above      
+        
+v1 = Vector(1, 4, 8, 9)
+v2 = Vector(5, 3, 2, 1)
+
+print(v1)
+print(v2)
+print(v1 + v2)
+
+     
+
+# %%
+# create a Person class
+# this isnt saving the friends list
+
+class Person:
+    def __init__(self, name, date_of_birth, friends=None):
+         self.name = name
+         self.date_of_birth = date_of_birth
+         #self.list = friends or []
+         number_of_friends = len(friends)
+         self.number_of_friends = number_of_friends
+         
+         
+    def __str__(self):
+        
+        return str(self.__dict__)
+# Continue. check how gt function works as I am using a mthod/ def instead I think
+# Define the __gt__ magic method that defines how to use the greater than 
+# sign to compare the age of two people (hint: Compare the DOB of the two 
+# people)
+# Create a method called add_friend, which takes in another instance of 
+# the person class and adds it to this instance's friends attribute. Assume 
+# that every relationship goes both ways: this method should append each 
+# friend to the other's list, in just one call   
+
+    def __gt__(self, other):
+        #return self.date_of_birth  > other.date_of_birth
+        if self.date_of_birth == other.date_of_birth:
+            return f"{self.name} is the same age as {other.name}"
+        elif self.date_of_birth  > other.date_of_birth:
+            return f"{self.name} is younger than {other.name}"
+        else:
+            return f"{other.name} is older than {self.name}"
+    
+    def add_friend(self, other):
+        self.number_of_friends, other.number_of_friends = (self.number_of_friends + other.number_of_friends), (self.number_of_friends + other.number_of_friends) 
+        return self.number_of_friends, other.number_of_friends
+        
+         
+person_1 = Person("James", "1976-08-30", ["Tom", "Dick", "Harry"])  
+person_2 = Person("Tom", "1976-08-29", ["Peter", "Pickle"])  
+print(person_1)                               
+print(person_2) 
+print(person_1 > person_2)
+person_1.add_friend(person_2)
+print(person_1)                               
+print(person_2)                                  
+                                       
+# %%
+
+#This one only calculates the number of friends in the __str__ method
+class Person:
+    def __init__(self, name, date_of_birth, friends):
+         self.name = name
+         self.date_of_birth = date_of_birth
+         self.friends = friends or []
+         #number_of_friends = len(friends)
+         #self.number_of_friends =  number_of_friends
+         
+         
+    def __str__(self):
+        #number_of_friends = len(self.list)
+        number_of_friends = len(self.friends)
+        print(self.__dict__)
+    #   *** add number of friends to PERSON AND REMOVE FRIENDS NAMES
+    # *** COULD POP IN INIT AND SAVE VALUE FOR LATER BY POP(LIST)?
+        #print(number_of_friends)
+        return f"Name: {self.name}, Date of birth: {self.date_of_birth}, Number of friends: {number_of_friends} "
+# Continue. check how gt function works as I am using a mthod/ def instead I think
+# Define the __gt__ magic method that defines how to use the greater than 
+# sign to compare the age of two people (hint: Compare the DOB of the two 
+# people)
+# Create a method called add_friend, which takes in another instance of 
+# the person class and adds it to this instance's friends attribute. Assume 
+# that every relationship goes both ways: this method should append each 
+# friend to the other's list, in just one call   
+
+    def __gt__(self, other):
+        #return self.date_of_birth  > other.date_of_birth
+        if self.date_of_birth == other.date_of_birth:
+            return f"{self.name} is the same age as {other.name}"
+        elif self.date_of_birth  > other.date_of_birth:
+            return f"{self.name} is younger than {other.name}"
+        else:
+            return f"{other.name} is older than {self.name}"
+    
+    def add_friend(self, other):
+        self.friends, other.friends= self.friends + other.friends, other.friends + self.friends
+        return self.friends, other.friends 
+        #self.number_of_friends, other.number_of_friends = (self.number_of_friends + other.number_of_friends), (self.number_of_friends + other.number_of_friends) 
+        #return self.number_of_friends, other.number_of_friends
+        
+         
+person_1 = Person("James", "1976-08-30", ["Tom", "Dick", "Harry"])  
+person_2 = Person("Tom", "1974-08-29", ["Peter", "Pickle"])  
+print(person_1)                               
+print(person_2)  
+print(person_1 > person_2)
+person_1.add_friend(person_2)
+print(person_1)                               
+print(person_2)  
+# %%
+# This one sets the n umber of freinds aas an additional entry in the __init__ and then in the __gt__ outputs without the friens, just number of friends
+class Person:
+    def __init__(self, name, date_of_birth, friends=None):
+         self.name = name
+         self.date_of_birth = date_of_birth
+         self.list = friends or []
+         number_of_friends = len(friends)
+         self.number_of_friends = number_of_friends
+         
+         
+    def __str__(self):
+        print(self.__dict__)
+        return f"Name: {self.name}, Date of birth: {self.date_of_birth}, Number of friends: {self.number_of_friends} "
+        #return str(self.__dict__)
+# Continue. check how gt function works as I am using a mthod/ def instead I think
+# Define the __gt__ magic method that defines how to use the greater than 
+# sign to compare the age of two people (hint: Compare the DOB of the two 
+# people)
+# Create a method called add_friend, which takes in another instance of 
+# the person class and adds it to this instance's friends attribute. Assume 
+# that every relationship goes both ways: this method should append each 
+# friend to the other's list, in just one call   
+
+    def __gt__(self, other):
+        #return self.date_of_birth  > other.date_of_birth
+        if self.date_of_birth == other.date_of_birth:
+            return f"{self.name} is the same age as {other.name}"
+        elif self.date_of_birth  > other.date_of_birth:
+            return f"{self.name} is younger than {other.name}"
+        else:
+            return f"{other.name} is older than {self.name}"
+    
+    def add_friend(self, other):
+        self.number_of_friends, other.number_of_friends = (self.number_of_friends + other.number_of_friends), (self.number_of_friends + other.number_of_friends) 
+        return self.number_of_friends, other.number_of_friends
+        
+         
+person_1 = Person("James", "1976-08-30", ["Tom", "Dick", "Harry"])  
+person_2 = Person("Tom", "1976-08-29", ["Peter", "Pickle"])  
+print(person_1)                               
+print(person_2) 
+print(person_1 > person_2)
+person_1.add_friend(person_2)
+print(person_1)                               
+print(person_2)                                  
+                                       
+# %%
+class Person:
+    def __init__(self, name, date_of_birth, friends):
+         self.name = name
+         self.date_of_birth = date_of_birth
+         self.friends = friends or []
+         number_of_friends = len(friends)
+         self.number_of_friends = number_of_friends
+         
+         
+    def __str__(self):
+        print(self.__dict__)
+        return f"Name: {self.name}, Date of birth: {self.date_of_birth}, Number of friends: {self.number_of_friends} "
+        #return str(self.__dict__)
+# Continue. check how gt function works as I am using a mthod/ def instead I think
+# Define the __gt__ magic method that defines how to use the greater than 
+# sign to compare the age of two people (hint: Compare the DOB of the two 
+# people)
+# Create a method called add_friend, which takes in another instance of 
+# the person class and adds it to this instance's friends attribute. Assume 
+# that every relationship goes both ways: this method should append each 
+# friend to the other's list, in just one call   
+
+    def __gt__(self, other):
+        #return self.date_of_birth  > other.date_of_birth
+        if self.date_of_birth == other.date_of_birth:
+            return f"{self.name} is the same age as {other.name}"
+        elif self.date_of_birth  > other.date_of_birth:
+            return f"{self.name} is younger than {other.name}"
+        else:
+            return f"{other.name} is older than {self.name}"
+    
+    def add_friend(self, other):
+        self.number_of_friends, other.number_of_friends = (self.number_of_friends + other.number_of_friends), (self.number_of_friends + other.number_of_friends)
+        self.friends, other.friends= self.friends + other.friends, other.friends + self.friends
+        return self.number_of_friends, other.number_of_friends, self.friends, other.friends
+        
+         
+person_1 = Person("James", "1976-08-30", ["Tom", "Dick", "Harry"])  
+person_2 = Person("Tom", "1976-08-29", ["Peter", "Pickle"])  
+print(person_1)                               
+print(person_2) 
+print(person_1 > person_2)
+person_1.add_friend(person_2)
+print(person_1)                               
+print(person_2)  
+
+# %%
+# create shape class
+
+class Shape:
+    def __init__(self, num_sides, tesselates=None):
+        self.num_sides = num_sides
+        if num_sides == 0:
+            print("Number of sides has to be greater zero (0)")
+        #else:
+         #   print(f"The object has {self.num_sides} sides")
+            
+    def get_info(self):
+        return NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, num_sides, tesselates=None):
+        super().__init__(num_sides, tesselates=None)
+       
+    def get_info(self):
+        if self.num_sides == 1:
+            self.tesselates = False
+            print("This is a Circle")
+            return self.__dict__
+        else:
+            return "This isn't a Circle"
+       
+       
+shape_1 = Circle(0)
+shape_2 = Circle(1)
+print(shape_2.get_info())
+shape_3 = Circle(3)
+print(shape_3.get_info())
+
 # %%
