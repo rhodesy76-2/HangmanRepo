@@ -1,7 +1,8 @@
 # %%
 # Import random module
 import random
-
+# Imported exit from sys so I could terminate my game when No selected in play_again method
+from sys import exit
 # escape in input as isalpha is called, how to recognize still?
 
 # Creates the Hangman class
@@ -20,8 +21,8 @@ class Hangman():
         self.word_list = word_list 
         # New variable, a list of guesssed letters, set to empty initially
         self.list_of_guesses = [] 
-        # Just checking how the variables change by printing dictionary
-        print(self.__dict__)
+        # Just checking how the variables change by printing dictionary for testing, edited out
+        # print(self.__dict__)
 
     # Method to check guess, takes the guess as variable      
     def check_guess(self, guess): 
@@ -114,8 +115,9 @@ class Hangman():
         # Created a while True loop  to check user input o
         while True:
             # Takes user input and assigns to guess variable
-            guess = input("Please input a single letter")  
+            guess = input("Please input a single alphabetic letter: ")  
             # Checks if the guess is not (False) a single (!=) aplhabet (isaplha)
+            # TODO Could add a condition to check if escape pressed 
             if len(guess) != 1 or guess.isalpha() == False: 
                 print(f"{guess} is an invalid letter. Please, enter a single alphabetical character.")
             # Checks if the guess has aldready been guesssed
@@ -130,31 +132,55 @@ class Hangman():
                 self.check_guess(guess)
                 # Adds the guess to the end list of guesses (append)
                 self.list_of_guesses.append(guess)
-                # Just checking how the variables change by printing dictionary
-                print(self.__dict__)
+                # Just checking how the variables change by printing dictionary for testing, edited out
+                # print(self.__dict__)
                 break
     
+    # Defined a simple play again method. Could improve by checking if other letters input, if just one letter etc. Does accept upper and lower case
+    def play_again(self):
+        while True:
+            yes_no_input = input("Do you want to play again y/n?: ")
+            # If Y used is set to y using .lower()
+            yes_no_input = yes_no_input.lower()
+            # TODO Not using next bit as had issues recognosing y or n. Can expand later
+            # if len(yes_no_input) != 1 or yes_no_input != ("n" or "y"): 
+             #   print(f"{yes_no_input} is an invalid input. Please enter y or n only.")
+            
+            # If input = y run the playgame with a new word. Checked the new word is random
+            if yes_no_input == "y":
+                print("You chose to play again")
+                play_game(self.word_list)
+            else:
+                print("Game closed")
+                # Called Exit from sys at top of page, implemented here to terminate the loop, as break still continued the play_game method and created an unwanted loop
+                exit()
+                
+         
     
-# Metjod to run the game                
+# Method to run the game                
 def play_game(word_list):
-        # creates an instance of Hanman, taking variables of the word list and num_lives default value set to 5; important stays 5 as otheriwse graphics dont work as only 5 drawings
+        # Creates an instance of Hanman, taking variables of the word list and num_lives default value set to 5; important stays 5 as otheriwse graphics dont work as only 5 drawings
         game = Hangman(word_list, num_lives=5) 
         # while true loop 
         while True:
+            # If number of lives equals 0 
             if game.num_lives == 0:
                 print('You lost!')
                 print(f"The word was '{game.word}'")
-                break
+                # Calls the play again function
+                game.play_again()
+                # Break removed as added play again feature
             elif game.num_letters > 0:
-               game.ask_for_input()
+                game.ask_for_input()
             else:
                 print('Congratulations. You won the game!')
-                break
+                # Calls the play again method
+                game.play_again()
+                # Break removed as added play again feature
         
 # Calls the play_game function to play your game.
 play_game(["banana", "apple", "kiwi", "orange", "pear"])
 # %%
-this = enumerate("pear")
-print(this)
+
 
 # %%
