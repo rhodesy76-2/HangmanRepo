@@ -524,7 +524,7 @@ print(cyl_1.get_surface_area())
 print(cyl_1.get_volume())
 print(cyl_1.__dict__)
 
-# lols that height 6 and radius 3 volume = surface area
+# lols that height 6 and radius 3; volume = surface area
 
 # %%
 # Hangman program?
